@@ -34,4 +34,4 @@ You can either build the project by running **/ios/RandomSWFacts.xcode/project.p
 
 ## Screenshots
 
-To be added
+![Screenshot 1](https://i.ibb.co/YLysmYR/Screenshot-20211006-210857-Random-SWFacts.jpg) ![Screenshot 2](https://i.ibb.co/LgvHWvS/Screenshot-20211006-210824-Random-SWFacts.jpg)
