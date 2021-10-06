@@ -11,13 +11,8 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
 import FactsSwipe from './src/screens/FactsSwipe';
 import {colors} from './src/constants/theme';
@@ -25,6 +20,7 @@ import {colors} from './src/constants/theme';
 const getContainerStyle = isDarkMode => {
   return {
     backgroundColor: isDarkMode ? colors.DARK_THEME : colors.LIGHT_THEME,
+    flex: 1,
   };
 };
 
@@ -35,15 +31,18 @@ const App: () => Node = () => {
 
   const barStyle = isDarkMode ? 'light-content' : 'dark-content';
 
+  const client = new ApolloClient({
+    uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
+    cache: new InMemoryCache(),
+  });
+
   return (
-    <SafeAreaView style={mainContainerStyle}>
-      <StatusBar barStyle={barStyle} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={mainContainerStyle}>
+    <ApolloProvider client={client}>
+      <SafeAreaView style={mainContainerStyle}>
+        <StatusBar barStyle={barStyle} />
         <FactsSwipe />
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ApolloProvider>
   );
 };
 
